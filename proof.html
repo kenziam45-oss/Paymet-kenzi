@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bukti — PayGateway Kenzi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <div class="checkmark">✓</div>
+      <h1 style="text-align:center;">Bukti Pembayaran</h1>
+      <p class="sub" style="text-align:center;">PayGateway Kenzi</p>
+      <div class="summary">
+        <div class="row"><span>Order</span><strong id="prOrder">-</strong></div>
+        <div class="row"><span>Nama</span><strong id="prNama">-</strong></div>
+        <div class="row"><span>Jumlah</span><strong id="prAmount">-</strong></div>
+        <div class="row"><span>Keterangan</span><strong id="prDesc">-</strong></div>
+        <div class="row"><span>DANA Pengirim</span><strong id="prNope">-</strong></div>
+        <div class="row"><span>DANA Tujuan</span><strong>085814327361</strong></div>
+        <div class="row"><span>Status</span><strong style="color:#10b981;">SUKSES</strong></div>
+        <div class="row"><span>Waktu</span><strong id="prTime">-</strong></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const id = new URLSearchParams(location.search).get('id');
+    (async () => {
+      try {
+        const r = await fetch(`/api/order?id=${encodeURIComponent(id)}`);
+        const d = await r.json();
+        if (!r.ok || !d.order) { location.href = '/'; return; }
+        if (d.order.status !== 'sukses') { location.href = `/pay.html?id=${id}`; return; }
+        const o = d.order;
+        document.getElementById('prOrder').textContent = o.id;
+        document.getElementById('prNama').textContent = o.nama;
+        document.getElementById('prAmount').textContent = 'Rp' + Number(o.amount).toLocaleString('id-ID');
+        document.getElementById('prDesc').textContent = o.description;
+        document.getElementById('prNope').textContent = o.dana_number;
+        document.getElementById('prTime').textContent = new Date(o.sukses_at).toLocaleString('id-ID');
+      } catch {
+        location.href = '/';
+      }
+    })();
+  </script>
+</body>
+</html>

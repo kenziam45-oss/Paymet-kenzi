@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — PayGateway Kenzi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container wide">
+    <div id="loginBox" class="card">
+      <h1>Admin Login</h1>
+      <p class="sub">Masukkan password admin.</p>
+      <form id="adminForm">
+        <label><span>Password</span><input type="password" id="adminPw" required></label>
+        <button type="submit">Masuk</button>
+      </form>
+      <p id="loginErr" class="error hidden"></p>
+    </div>
+
+    <div id="dashBox" class="hidden">
+      <div class="dash-header">
+        <h1>Notif Pembayaran</h1>
+        <button id="logoutBtn" class="btn-secondary">Logout</button>
+      </div>
+      <div class="stat-bar">
+        <span>Proses: <strong id="cntProses">0</strong></span>
+        <span>Sukses: <strong id="cntSukses">0</strong></span>
+        <span>Batal: <strong id="cntBatal">0</strong></span>
+      </div>
+      <div id="orderList"></div>
+    </div>
+  </main>
+  <script src="/admin.js"></script>
+</body>
+</html>

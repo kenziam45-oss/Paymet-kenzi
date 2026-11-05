@@ -1,0 +1,20 @@
+import { makeToken } from '../lib/auth.js';
+
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'method not allowed' });
+
+  try {
+    const { password } = req.body || {};
+    if (!password) return res.status(400).json({ error: 'password wajib' });
+    if (password !== process.env.ADMIN_PASSWORD)
+      return res.status(401).json({ error: 'password salah' });
+    return res.json({ token: makeToken() });
+  } catch (e) {
+    console.error('admin-login error:', e);
+    return res.status(500).json({ error: e.message || 'server error' });
+  }
+}

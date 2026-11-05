@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayGateway Kenzi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <div class="brand">
+        <span class="brand-mark">K</span>
+        <div>
+          <h1>PayGateway Kenzi</h1>
+          <p class="sub" style="margin:0;">Bayar cepat. Konfirmasi manual. Aman.</p>
+        </div>
+      </div>
+
+      <form id="orderForm">
+        <label><span>Nama Kamu</span>
+          <input type="text" id="nama" placeholder="Nama lengkap" required>
+        </label>
+        <label><span>Jumlah (Rp)</span>
+          <input type="number" id="amount" min="1000" placeholder="10000" required>
+        </label>
+        <label><span>Keterangan</span>
+          <input type="text" id="description" placeholder="Bayar apa?" required>
+        </label>
+        <button type="submit" id="orderBtn">Lanjutkan</button>
+      </form>
+      <p id="error" class="error hidden"></p>
+    </div>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

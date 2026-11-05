@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konfirmasi — PayGateway Kenzi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <div id="stepConfirm" class="card hidden">
+      <h1>Proses Pembayaran?</h1>
+      <p class="sub">Order: <strong id="orderIdText">-</strong></p>
+      <div class="summary">
+        <div class="row"><span>Nama</span><strong id="sumNama">-</strong></div>
+        <div class="row"><span>Jumlah</span><strong id="sumAmount">-</strong></div>
+        <div class="row"><span>Keterangan</span><strong id="sumDesc">-</strong></div>
+      </div>
+      <div class="btn-row">
+        <button id="noBtn" class="btn-secondary">Tidak</button>
+        <button id="yesBtn" class="btn-primary">Ya, Proses</button>
+      </div>
+    </div>
+
+    <div id="stepTf" class="card hidden">
+      <h1>Transfer ke DANA</h1>
+      <p class="sub">Kirim sesuai nominal, lalu isi nomor DANA kamu di bawah.</p>
+      <div class="tf-box">
+        <div class="tf-label">Nomor DANA Tujuan</div>
+        <div class="tf-number" id="danaNum">085814327361</div>
+        <button id="copyDana" class="btn-copy" type="button">Copy</button>
+        <div class="tf-label" style="margin-top:14px;">Nominal</div>
+        <div class="tf-amount" id="tfAmount">Rp0</div>
+      </div>
+      <label><span>Nomor DANA Kamu (pengirim)</span>
+        <input type="tel" id="nope" placeholder="0858xxxxxxx" required>
+      </label>
+      <button id="submitNope" class="btn-primary" type="button">Saya Sudah Transfer</button>
+      <p id="errTf" class="error hidden"></p>
+    </div>
+
+    <div id="stepProses" class="card hidden">
+      <div class="spinner"></div>
+      <h1 style="text-align:center;">PROSES</h1>
+      <p class="sub" style="text-align:center;">Transfer kamu sedang diverifikasi admin. Halaman ini auto-update.</p>
+      <div class="summary">
+        <div class="row"><span>Order</span><strong id="pOrder">-</strong></div>
+        <div class="row"><span>Status</span><strong class="status-badge proses">PROSES</strong></div>
+        <div class="row"><span>Nomor DANA kamu</span><strong id="pNope">-</strong></div>
+      </div>
+    </div>
+
+    <div id="stepSukses" class="card hidden">
+      <div class="checkmark">✓</div>
+      <h1 style="text-align:center;">SUKSES</h1>
+      <p class="sub" style="text-align:center;">Pembayaran kamu sudah dikonfirmasi admin.</p>
+      <div class="summary">
+        <div class="row"><span>Order</span><strong id="sOrder">-</strong></div>
+        <div class="row"><span>Jumlah</span><strong id="sAmount">-</strong></div>
+        <div class="row"><span>Nomor DANA</span><strong id="sNope">-</strong></div>
+        <div class="row"><span>Waktu</span><strong id="sTime">-</strong></div>
+      </div>
+      <a id="proofLink" href="#" class="btn-primary" style="display:block;text-align:center;margin-top:14px;text-decoration:none;padding:13px;">Lihat Bukti</a>
+    </div>
+
+    <div id="stepBatal" class="card hidden">
+      <h1 style="text-align:center;">DIBATALKAN</h1>
+      <p class="sub" style="text-align:center;">Order ini sudah dibatalkan.</p>
+      <a href="/" class="btn-primary" style="display:block;text-align:center;margin-top:14px;text-decoration:none;padding:13px;">Buat Order Baru</a>
+    </div>
+
+    <div id="stepError" class="card hidden">
+      <h1 style="text-align:center;">ERROR</h1>
+      <p class="sub" style="text-align:center;" id="errMsg">Order tidak ditemukan.</p>
+      <a href="/" class="btn-primary" style="display:block;text-align:center;margin-top:14px;text-decoration:none;padding:13px;">Kembali</a>
+    </div>
+  </main>
+  <script src="/pay.js"></script>
+</body>
+</html>
